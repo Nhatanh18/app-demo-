@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Contacts</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content contact-list">
+  <ion-list [virtualScroll]="contacts">
+    <ion-grid fixed>
+      <ion-row align-items-stretch>
+
+        <ion-col col-12 col-md-6 align-self-stretch align-self-center *virtualItem="let contact" approxItemHeight="457px">
+
+          <ion-card class="contact-card">
+            <ion-card-header>
+              <button ion-item detail-none (click)="goToContactDetail(contact)">
+                <ion-avatar item-start>
+                  <img [src]="contact.profilePic" alt="Contact profile pic">
+                </ion-avatar>
+                {{contact.name}}
+              </button>
+            </ion-card-header>
+
+            <ion-card-content class="outer-content">
+              <ion-list>
+                <button ion-item *ngFor="let session of contact.sessions" (click)="goToSessionDetail(session)">
+                  <h3>{{session.name}}</h3>
+                </button>
+
+                <button ion-item (click)="goToContactDetail(contact)">
+                  <h3>About {{contact.name}}</h3>
+                </button>
+              </ion-list>
+            </ion-card-content>
+
+            <ion-row no-padding>
+              <ion-col col-12 col-lg-auto text-center text-lg-left>
+                <button ion-button clear small color="primary" icon-left (click)="goToContactTwitter(contact)">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                  Tweet
+                </button>
+              </ion-col>
+              <ion-col col-12 col-lg-auto text-center>
+                <button ion-button clear small color="primary" icon-left (click)="openContactShare(contact)">
+                  <ion-icon name='share-alt'></ion-icon>
+                  Share
+                </button>
+              </ion-col>
+              <ion-col col-12 col-lg-auto text-center text-lg-right>
+                <button ion-button clear small color="primary" icon-left (click)="openContact(contact)">
+                  <ion-icon name='chatboxes'></ion-icon>
+                  Contact
+                </button>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>
